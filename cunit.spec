@@ -73,7 +73,7 @@ chmod 644 AUTHORS COPYING NEWS ChangeLog README TODO INSTALL VERSION
 
 %build
 automake-1.9
-autoconf-2.5x
+autoconf
 %configure --enable-curses
 %make
 
