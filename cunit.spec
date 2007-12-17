@@ -18,7 +18,6 @@ Patch0:         %{name}-2.1.0.link_against_ncurses.patch
 BuildRequires:  ncurses-devel
 BuildRequires:  automake1.9
 BuildRequires:  autoconf2.5
-Buildroot:	    %{_tmppath}/%{name}-%{version}
 
 %description
 CUnit is a lightweight system for writing, administering, and running unit
