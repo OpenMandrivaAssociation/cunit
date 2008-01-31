@@ -1,24 +1,23 @@
-%define name		cunit
-%define Name		CUnit
-%define version		2.1.0
-%define bad_version	2.1-0
-%define release		%mkrel 3
-%define	major		1
-%define	libname		%mklibname %{name} %{major}
+%define name cunit
+%define Name CUnit
+%define version 2.1.0
+%define bad_version 2.1-0
+%define release %mkrel 4
+%define	major 1
+%define	libname %mklibname %{name} %{major}
+%define develname %mklibname %{name} -d
 
-Name:		    %{name}
-Version:	    %{version}
-Release:	    %{release}
-License:	    GPL
-Summary:	    A Unit Testing Framework for C
-Group:		    System/Libraries
-URL:		    http://cunit.sourceforge.net
-Source:		    http://prdownloads.sourceforge.net/cunit/%{Name}-%{bad_version}-src.tar.gz
-Patch0:         %{name}-2.1.0.link_against_ncurses.patch
-BuildRequires:  ncurses-devel
-BuildRequires:  automake1.9
-BuildRequires:  autoconf2.5
-Buildroot:	    %{_tmppath}/%{name}-%{version}
+Name:		%{name}
+Version:	%{version}
+Release:	%{release}
+License:	GPLv2+
+Summary:	A Unit Testing Framework for C
+Group:		System/Libraries
+URL:		http://cunit.sourceforge.net
+Source:		http://prdownloads.sourceforge.net/cunit/%{Name}-%{bad_version}-src.tar.gz
+Patch0:		%{name}-2.1.0.link_against_ncurses.patch
+BuildRequires:	ncurses-devel
+Buildroot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 CUnit is a lightweight system for writing, administering, and running unit
@@ -36,11 +35,11 @@ These interfaces currently include:
 - Console: Interactive console interface (ansi C)
 - Curses: Interactive graphical interface (Unix)
 
-%package -n	%{libname}
+%package -n %{libname}
 Summary:	C testing framework
 Group:		System/Libraries
 
-%description -n	%{libname}
+%description -n %{libname}
 CUnit is a lightweight system for writing, administering, and running unit
 tests in C.  It provides C programmers a basic testing functionality with a
 flexible variety of user interfaces.
@@ -56,25 +55,30 @@ These interfaces currently include:
 - Console: Interactive console interface (ansi C)
 - Curses: Interactive graphical interface (Unix)
 
-%package -n	%{libname}-devel 
+%package -n %{develname}
 Summary:	Development files for %{name}
 Group:		Development/C
-Requires:	%{libname} = %{version}
+Requires:	%{libname} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
 Provides:	lib%{name}-devel = %{version}-%{release}
+Obsoletes:	%mklibname %{name} 1 -d
 
-%description -n	%{libname}-devel
+%description -n	%{develname}
 This package contains development files for %{name}.
 
 %prep
 %setup -q -n %{Name}-%{bad_version}
 %patch0 -p 0
-chmod 644 AUTHORS COPYING NEWS ChangeLog README TODO INSTALL VERSION
+chmod 644 AUTHORS NEWS ChangeLog README TODO
 
 %build
-automake-1.9
+aclocal
 autoconf
-%configure --enable-curses
+automake
+
+%configure2_5x \
+	--enable-curses
+
 %make
 
 %install
@@ -88,7 +92,7 @@ perl -pi -e 's| -L\S+ ||'  %{buildroot}%{_libdir}/libcunit.la
 install -d -m 755 %{buildroot}%{_datadir}/doc/%{libname}-devel-%{version}
 mv %{buildroot}%{_prefix}/doc/%{Name} \
     %{buildroot}%{_datadir}/doc/%{libname}-devel-%{version}/html
-install -m 644 AUTHORS COPYING NEWS ChangeLog README TODO INSTALL VERSION \
+install -m 644 AUTHORS NEWS ChangeLog README TODO \
     %{buildroot}%{_datadir}/doc/%{libname}-devel-%{version} 
 rm -rf %{buildroot}%{_prefix}/doc
 
@@ -101,10 +105,9 @@ rm -rf %{buildroot}
 
 %files -n %{libname}
 %defattr(-,root,root)
-%doc COPYING
-%{_libdir}/*.so.*
+%{_libdir}/*.so.%{major}*
 
-%files -n %{libname}-devel
+%files -n %{develname}
 %defattr(-,root,root)
 %{_datadir}/doc/%{libname}-devel-%{version}
 %{_libdir}/*.la
@@ -113,5 +116,3 @@ rm -rf %{buildroot}
 %{_includedir}/%{Name}
 %{_datadir}/%{Name}
 %{_mandir}/man3/*
-
-
