@@ -96,9 +96,13 @@ install -m 644 AUTHORS NEWS ChangeLog README TODO \
     %{buildroot}%{_datadir}/doc/%{libname}-devel-%{version} 
 rm -rf %{buildroot}%{_prefix}/doc
 
+%if %mdkversion < 200900
 %post -n %{libname} -p /sbin/ldconfig
+%endif
 
+%if %mdkversion < 200900
 %postun -n %{libname} -p /sbin/ldconfig
+%endif
 
 %clean
 rm -rf %{buildroot}
