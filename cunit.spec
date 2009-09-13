@@ -2,7 +2,7 @@
 %define Name CUnit
 %define version 2.1.0
 %define bad_version 2.1-0
-%define release %mkrel 7
+%define release %mkrel 8
 %define	major 1
 %define	libname %mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
@@ -72,13 +72,9 @@ This package contains development files for %{name}.
 chmod 644 AUTHORS NEWS ChangeLog README TODO
 
 %build
-aclocal
-autoconf
-automake
-
+autoreconf -f -i
 %configure2_5x \
 	--enable-curses
-
 %make
 
 %install
