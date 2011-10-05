@@ -1,8 +1,8 @@
 %define name cunit
 %define Name CUnit
-%define version 2.1.0
-%define bad_version 2.1-0
-%define release %mkrel 9
+%define version 2.1.2
+%define bad_version 2.1-2
+%define release %mkrel 1
 %define	major 1
 %define	libname %mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
@@ -14,7 +14,7 @@ License:	GPLv2+
 Summary:	A Unit Testing Framework for C
 Group:		System/Libraries
 URL:		http://cunit.sourceforge.net
-Source:		http://prdownloads.sourceforge.net/cunit/%{Name}-%{bad_version}-src.tar.gz
+Source:		http://sourceforge.net/projects/cunit/files/CUnit/%{bad_version}/%{Name}-%{bad_version}-src.tar.bz2
 Patch0:		%{name}-2.1.0.link_against_ncurses.patch
 BuildRequires:	ncurses-devel
 Buildroot:	%{_tmppath}/%{name}-%{version}-buildroot
@@ -113,6 +113,7 @@ rm -rf %{buildroot}
 %{_libdir}/*.la
 %{_libdir}/*.so
 %{_libdir}/*.a
+%{_libdir}/pkgconfig/%{name}.pc
 %{_includedir}/%{Name}
 %{_datadir}/%{Name}
 %{_mandir}/man3/*
