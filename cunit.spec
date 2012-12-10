@@ -2,7 +2,7 @@
 %define Name CUnit
 %define version 2.1.2
 %define bad_version 2.1-2
-%define release %mkrel 1
+%define release 2
 %define	major 1
 %define	libname %mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
@@ -14,10 +14,9 @@ License:	GPLv2+
 Summary:	A Unit Testing Framework for C
 Group:		System/Libraries
 URL:		http://cunit.sourceforge.net
-Source:		http://sourceforge.net/projects/cunit/files/CUnit/%{bad_version}/%{Name}-%{bad_version}-src.tar.bz2
+Source0:	http://sourceforge.net/projects/cunit/files/CUnit/%{bad_version}/%{Name}-%{bad_version}-src.tar.bz2
 Patch0:		%{name}-2.1.0.link_against_ncurses.patch
-BuildRequires:	ncurses-devel
-Buildroot:	%{_tmppath}/%{name}-%{version}-buildroot
+BuildRequires:	pkgconfig(ncurses)
 
 %description
 CUnit is a lightweight system for writing, administering, and running unit
@@ -92,25 +91,11 @@ install -m 644 AUTHORS NEWS ChangeLog README TODO \
     %{buildroot}%{_datadir}/doc/%{libname}-devel-%{version} 
 rm -rf %{buildroot}%{_prefix}/doc
 
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
-
-%clean
-rm -rf %{buildroot}
-
 %files -n %{libname}
-%defattr(-,root,root)
 %{_libdir}/*.so.%{major}*
 
 %files -n %{develname}
-%defattr(-,root,root)
 %{_datadir}/doc/%{libname}-devel-%{version}
-%{_libdir}/*.la
 %{_libdir}/*.so
 %{_libdir}/*.a
 %{_libdir}/pkgconfig/%{name}.pc
