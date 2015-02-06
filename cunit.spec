@@ -2,7 +2,7 @@
 %define Name CUnit
 %define version 2.1.2
 %define bad_version 2.1-2
-%define release 2
+%define release 3
 %define	major 1
 %define	libname %mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
