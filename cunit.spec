@@ -93,7 +93,6 @@ rm -rf %{buildroot}%{_prefix}/doc
 %files -n %{develname}
 %{_datadir}/doc/%{libname}-devel-%{version}
 %{_libdir}/*.so
-%{_libdir}/*.a
 %{_libdir}/pkgconfig/%{name}.pc
 %{_includedir}/%{Name}
 %{_datadir}/%{Name}
