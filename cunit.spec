@@ -1,15 +1,12 @@
-%define name cunit
 %define Name CUnit
-%define version 2.1.2
 %define bad_version 2.1-2
-%define release 3
 %define	major 1
 %define	libname %mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
 
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
+Name:		cunit
+Version:	2.1.2
+Release:	4
 License:	GPLv2+
 Summary:	A Unit Testing Framework for C
 Group:		System/Libraries
@@ -77,7 +74,6 @@ autoreconf -f -i
 %make
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
 
 # fix la file
