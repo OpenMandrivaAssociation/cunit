@@ -6,7 +6,7 @@
 
 Name:		cunit
 Version:	2.1.3
-Release:	1
+Release:	2
 License:	GPLv2+
 Summary:	A Unit Testing Framework for C
 Group:		System/Libraries
