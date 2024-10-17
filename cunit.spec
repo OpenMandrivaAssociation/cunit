@@ -10,7 +10,7 @@ Release:	4
 License:	GPLv2+
 Summary:	A Unit Testing Framework for C
 Group:		System/Libraries
-URL:		http://cunit.sourceforge.net
+URL:		https://cunit.sourceforge.net
 Source0:	http://sourceforge.net/projects/cunit/files/CUnit/%{bad_version}/%{Name}-%{bad_version}.tar.bz2
 Patch0:		%{name}-2.1.0.link_against_ncurses.patch
 BuildRequires:	pkgconfig(ncurses)
