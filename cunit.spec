@@ -13,6 +13,11 @@ Group:		System/Libraries
 URL:		https://cunit.sourceforge.net
 Source0:	http://sourceforge.net/projects/cunit/files/CUnit/%{bad_version}/%{Name}-%{bad_version}.tar.bz2
 Patch0:		%{name}-2.1.0.link_against_ncurses.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	pkgconfig(ncurses)
 
 %description
